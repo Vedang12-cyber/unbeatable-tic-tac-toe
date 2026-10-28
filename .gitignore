@@ -1,0 +1,5 @@
+*.exe
+*.o
+tictactoe
+!tictactoe.cpp
+.vscode/

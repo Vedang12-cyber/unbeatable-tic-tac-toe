@@ -1,0 +1,78 @@
+:root{
+  --paper:#eef3f7; --card:#ffffff; --ink:#1f3a5f; --pencil:#c8403a;
+  --grid:#c9d6e2; --muted:#5b6f86; --win:#fff1c2;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121c26; --card:#1a2733; --ink:#d6e4f5; --pencil:#ff7a70;
+    --grid:#243546; --muted:#8fa5bc; --win:#3a3418;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121c26; --card:#1a2733; --ink:#d6e4f5; --pencil:#ff7a70;
+  --grid:#243546; --muted:#8fa5bc; --win:#3a3418;
+}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0; min-height:100vh; color:var(--ink); background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  line-height:1.5;
+}
+main{max-width:920px; margin:0 auto; padding:28px 18px 40px}
+h1{font-family:Kalam,"Comic Sans MS",cursive; font-size:clamp(2rem,6vw,3.2rem); margin:0; line-height:1.1}
+.sub{margin:6px 0 26px; color:var(--muted); max-width:56ch}
+.layout{display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:22px; align-items:start}
+@media (max-width:760px){.layout{grid-template-columns:1fr}}
+.panel{background:var(--card); border:2px solid var(--ink); border-radius:14px; padding:18px}
+.status{font-family:Kalam,cursive; font-size:1.5rem; margin:0 0 14px; min-height:2.2rem}
+.board{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+  width:min(100%,420px); margin:0 auto; aspect-ratio:1;
+}
+.cell{
+  background:transparent; border:0; padding:6%; cursor:pointer; color:inherit;
+  border-right:3px solid var(--ink); border-bottom:3px solid var(--ink);
+  transition:background .15s;
+}
+.cell:nth-child(3n){border-right:0}
+.cell:nth-child(n+7){border-bottom:0}
+.cell:not(:disabled):hover{background:var(--grid)}
+.cell:focus-visible{outline:3px solid var(--pencil); outline-offset:-3px}
+.cell:disabled{cursor:default}
+.cell.win{background:var(--win)}
+.cell svg{width:100%; height:100%; display:block; overflow:visible}
+.mark{fill:none; stroke-width:9; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:0}
+.mark.x{stroke:var(--ink)}
+.mark.o{stroke:var(--pencil)}
+.mark.draw{animation:draw .28s ease-out}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.mark.draw{animation:none}}
+.controls{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; justify-content:center}
+.seg{display:inline-flex; border:2px solid var(--ink); border-radius:10px; overflow:hidden}
+.seg button{
+  font:inherit; padding:8px 14px; border:0; background:transparent; color:var(--ink); cursor:pointer;
+}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+.btn{
+  font:inherit; font-weight:600; padding:8px 16px; border-radius:10px; cursor:pointer;
+  border:2px solid var(--pencil); background:var(--pencil); color:#fff;
+}
+.seg button:focus-visible,.btn:focus-visible,.toggle input:focus-visible{outline:3px solid var(--pencil); outline-offset:2px}
+h2{font-family:Kalam,cursive; font-size:1.3rem; margin:0 0 10px}
+.stat{display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px dashed var(--grid)}
+.stat:last-of-type{border-bottom:0}
+.stat b{font-variant-numeric:tabular-nums}
+.verdict{margin:12px 0 0; padding:10px 12px; border-radius:8px; background:var(--paper); font-size:.95rem}
+.toggle{display:flex; gap:8px; align-items:center; margin-top:14px; font-size:.95rem; cursor:pointer}
+.score{display:grid; grid-template-columns:repeat(3,1fr); text-align:center; gap:6px; margin-bottom:18px}
+.score div{font-size:.85rem; color:var(--muted)}
+.score strong{display:block; font-family:Kalam,cursive; font-size:2rem; color:var(--ink); line-height:1.1}
+.side{display:grid; gap:18px}
+.explain{font-size:.9rem; color:var(--muted); margin:0}

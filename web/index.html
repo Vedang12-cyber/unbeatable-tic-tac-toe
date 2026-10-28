@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unbeatable Tic Tac Toe</title>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Unbeatable Tic Tac Toe</h1>
+  <p class="sub">The computer uses the minimax algorithm to look at every possible future of the game. Try to beat it. The best you can do is draw.</p>
+
+  <div class="layout">
+    <section class="panel" aria-label="Game">
+      <p class="status" id="status" aria-live="polite">Your move</p>
+      <div class="board" id="board" role="grid" aria-label="Tic tac toe board"></div>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Choose your side">
+          <button id="playX" aria-pressed="true">Play as X (first)</button>
+          <button id="playO" aria-pressed="false">Play as O (second)</button>
+        </div>
+        <button class="btn" id="reset">New game</button>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="panel" aria-label="Scoreboard">
+        <h2>Scoreboard</h2>
+        <div class="score">
+          <div><strong id="sWin">0</strong>You</div>
+          <div><strong id="sDraw">0</strong>Draws</div>
+          <div><strong id="sLoss">0</strong>Computer</div>
+        </div>
+        <h2>Computer's last search</h2>
+        <div class="stat"><span>Positions checked</span><b id="nodes">–</b></div>
+        <div class="stat"><span>Time taken</span><b id="time">–</b></div>
+        <div class="stat"><span>Pruning</span><b id="abState">On</b></div>
+        <p class="verdict" id="verdict">Make a move to see what the computer thinks.</p>
+        <label class="toggle">
+          <input type="checkbox" id="ab" checked>
+          Use alpha-beta pruning
+        </label>
+        <p class="explain" style="margin-top:8px">Turn it off to see how many more positions plain minimax has to check.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
