@@ -1,14 +1,9 @@
-/* ---------- Game state ---------- */
 const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 let board, human = 'X', ai = 'O', over, busy, nodes;
 const scores = { win: 0, draw: 0, loss: 0 };
 
 const $ = id => document.getElementById(id);
 const boardEl = $('board');
-
-/* ---------- Minimax core ---------- */
-
-// Returns {p:'X'|'O'|'draw', line:[..]} when the game is finished, else null.
 function result(b) {
   for (const [a, c, d] of WINS) {
     if (b[a] && b[a] === b[c] && b[a] === b[d]) return { p: b[a], line: [a, c, d] };
@@ -16,8 +11,7 @@ function result(b) {
   return b.includes(null) ? null : { p: 'draw', line: [] };
 }
 
-// Score is from the computer's point of view.
-// Faster wins score higher and slower losses score higher, so the AI wins quickly and loses slowly.
+
 function minimax(b, depth, isMax, alpha, beta, prune) {
   nodes++;
   const r = result(b);
@@ -63,7 +57,7 @@ function bestMove(prune) {
   return { move, score: best };
 }
 
-/* ---------- UI ---------- */
+
 function markSVG(p, animate) {
   const cls = 'mark ' + (p === 'X' ? 'x' : 'o') + (animate ? ' draw' : '');
   const shape = p === 'X'
